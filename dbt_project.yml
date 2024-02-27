@@ -36,12 +36,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 seeds:
-  nba_player_stats:
+  NBA_player_stats:
     +schema: seeds
 
 models:
-  NBA_player_stats:
-      +materialized: table
+  nba_player_stats:
+    +materialized: table
+    staging:
+      +schema: staging
    # Applies to all files under models/example/
   example:
-      +materialized: table
+      +materialized: view
