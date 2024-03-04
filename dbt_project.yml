@@ -38,6 +38,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 seeds:
   NBA_player_stats:
     +schema: seeds
+  NBA_rookies_stats:
+    +schema: seeds
 
 models:
   nba_player_stats:
