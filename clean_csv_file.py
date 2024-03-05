@@ -30,7 +30,7 @@ for file in list_of_files:
     new_columns = []
     for col in df.columns:
         # Remove '%' symbols
-        new_col = col.replace('%', '_pct').replace('/', '_').lower()
+        new_col = col.replace('%', '_pct').replace('/', '_').replace(' ', '_').lower()
         # Ensure the column name starts with a letter
         if re.match('^\d', new_col):
             new_col = 'c_' + new_col  # Prepend 'C' if it starts with a number
