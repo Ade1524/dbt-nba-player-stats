@@ -5,7 +5,7 @@ with nba_rookies_stats__players as (
 , renaming_columns_rookie_player_stats as (
         select id 
               ,player  as player_full_name
-              ,tm as team_player_played_in
+              ,tm as team
               ,age 
               ,yrs as years_in_the_league
               ,g as games_played
