@@ -5,7 +5,7 @@ with nba_player_stats as (
 
 
 , rename_player_stats_columns as (
-      select rk as rank
+      select rk as rank_id
             ,replace(replace(player,'*', ' '), '-', ' ') as player_full_name
             ,pos as position
             ,age as age
