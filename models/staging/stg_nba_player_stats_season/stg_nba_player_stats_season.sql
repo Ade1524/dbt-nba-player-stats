@@ -7,7 +7,7 @@ with nba_player_stats as (
             ,replace(replace(player,'*', ' '), '-', ' ') as player_full_name
             ,pos::varchar(1000) as position
             ,age::int as age
-            ,tm::varchar(1000) as team
+            ,tm::varchar(1000) as teams
             ,g::int as games
             ,gs::int as games_started
             ,mp::float as minutes_played_per_game
