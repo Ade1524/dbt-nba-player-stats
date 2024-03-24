@@ -31,7 +31,7 @@ with nba_rookies_stats__players as (
               ,ppg::float as points_per_game
               ,rpg::float as rebounds_per_game
               ,apg::float as assists_per_game
-              ,{{ get_season('year') }} AS season_id
+              ,{{ get_season('year') }} AS seasons
               ,pts_won::float as roty_points_won
               ,pts_max::float as max_amount_of_points_you_can_win
               ,share::float as pts_won_vs_pts_max
