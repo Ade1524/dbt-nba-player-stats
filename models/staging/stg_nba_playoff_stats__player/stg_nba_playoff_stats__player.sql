@@ -7,7 +7,7 @@ with nba_playoff_stats__players as (
                 ,replace(player, '-', ' ')::varchar(1000) as player_full_name
                 ,pos::varchar(1000) as position
                 ,age::int 
-                ,team_id::varchar(1000) as team 
+                ,team_id::varchar(1000) as teams
                 ,g::int as playoff_games_in_season
                 ,gs::int as playoff_games_started_in_season
                 ,mp_per_g::float as minutes_played_per_game

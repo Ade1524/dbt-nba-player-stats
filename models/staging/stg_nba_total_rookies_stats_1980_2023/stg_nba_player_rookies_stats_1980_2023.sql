@@ -5,7 +5,7 @@ with nba_rookies_stats__players as (
 , renaming_columns_rookie_player_stats as (
         select id::int as player_id
               ,replace(player, '-', ' ')::varchar(1000) as player_full_name
-              ,tm::varchar(1000) as team
+              ,tm::varchar(1000) as teams
               ,age::int 
               ,yrs::int as years_in_the_league
               ,g::int as games_played
