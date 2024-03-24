@@ -5,7 +5,7 @@ with nba_teams_table as (
 )
 
 , teams_unique_id as (
-    select {{ dbt_utils.generate_surrogate_key(['unique_teams', 'team_full_name']) }} as team_id
+    select {{ dbt_utils.generate_surrogate_key(['unique_teams', 'team_full_name']) }} as team_key
           ,unique_teams
           ,team_full_name
       from nba_teams_table

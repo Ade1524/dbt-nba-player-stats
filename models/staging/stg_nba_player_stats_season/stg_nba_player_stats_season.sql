@@ -33,7 +33,7 @@ with nba_player_stats as (
             ,tov::float as turnovers_per_game
             ,pf::float as personal_fouls_per_game
             ,pts::float as points_per_game
-            ,year::varchar(1000) as season_id
+            ,year::varchar(1000) as seasons
         
         from nba_player_stats
 )

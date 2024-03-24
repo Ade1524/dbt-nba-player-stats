@@ -3,7 +3,7 @@ with nba_playoff_stats__players as (
 )
 
 , renaming_playoff_players_columns as  (
-          select {{ get_season('season') }} AS season_id
+          select {{ get_season('season') }} AS seasons
                 ,replace(player, '-', ' ')::varchar(1000) as player_full_name
                 ,pos::varchar(1000) as position
                 ,age::int 
