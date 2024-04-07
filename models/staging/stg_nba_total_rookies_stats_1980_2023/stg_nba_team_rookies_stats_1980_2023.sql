@@ -5,10 +5,11 @@ with nba_rookies_stats__players as (
 , renaming_columns_rookie_teams_stats  as (
 
     select  id::int as player_id
+            ,{{ get_season('year') }} AS seasons
             ,replace(player, '-', ' ')::varchar(1000)  as player_full_name
+            ,(year::int - 1) - age::int as year_of_birth
             ,tm::varchar(1000) as teams
             ,age::int
-            ,{{ get_season('year') }} AS seasons
             ,yrs::int as years_in_the_league
             ,g::int as games_played
             ,team::varchar(1000) as team_full_name
@@ -23,4 +24,10 @@ with nba_rookies_stats__players as (
       from nba_rookies_stats__players       
 )
 
-select * from renaming_columns_rookie_teams_stats
+,rookie_teams_stats as (
+    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+            , *
+      from renaming_columns_rookie_teams_stats
+)
+
+select * from rookie_teams_stats 

@@ -4,7 +4,9 @@ with nba_rookies_stats__players as (
 
 , renaming_columns_rookie_player_stats as (
         select id::int as player_id
+              ,{{ get_season('year') }} AS seasons
               ,replace(player, '-', ' ')::varchar(1000) as player_full_name
+              ,(year::int - 1) - age::int as year_of_birth
               ,tm::varchar(1000) as teams
               ,age::int 
               ,yrs::int as years_in_the_league
@@ -31,7 +33,6 @@ with nba_rookies_stats__players as (
               ,ppg::float as points_per_game
               ,rpg::float as rebounds_per_game
               ,apg::float as assists_per_game
-              ,{{ get_season('year') }} AS seasons
               ,pts_won::float as roty_points_won
               ,pts_max::float as max_amount_of_points_you_can_win
               ,share::float as pts_won_vs_pts_max
@@ -39,4 +40,11 @@ with nba_rookies_stats__players as (
          from nba_rookies_stats__players     
 )
 
-select * from renaming_columns_rookie_player_stats
+,rookie_players_stats as (
+    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+            , *
+      from renaming_columns_rookie_player_stats
+)
+
+select * from rookie_players_stats 
+
