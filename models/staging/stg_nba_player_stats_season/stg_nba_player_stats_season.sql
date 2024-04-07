@@ -4,7 +4,9 @@ with nba_player_stats as (
 
 , rename_player_stats_columns as (
       select rk as rank_id
+            ,year::varchar(1000) as seasons
             ,replace(replace(player,'*', ' '), '-', ' ') as player_full_name
+            ,substring(year,1,4)::int - age as year_of_birth
             ,pos::varchar(1000) as position
             ,age::int as age
             ,tm::varchar(1000) as teams
@@ -33,10 +35,18 @@ with nba_player_stats as (
             ,tov::float as turnovers_per_game
             ,pf::float as personal_fouls_per_game
             ,pts::float as points_per_game
-            ,year::varchar(1000) as seasons
+            
         
         from nba_player_stats
 )
 
-select * from rename_player_stats_columns
+,players_stats_per_season as (
+    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+            , *
+      from rename_player_stats_columns
+)
+
+select * from players_stats_per_season
+
+
 

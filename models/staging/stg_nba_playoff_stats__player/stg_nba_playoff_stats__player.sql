@@ -3,9 +3,10 @@ with nba_playoff_stats__players as (
 )
 
 , renaming_playoff_players_columns as  (
-          select {{ get_season('season') }} AS seasons
+          select {{ get_season('season') }} as seasons
                 ,replace(player, '-', ' ')::varchar(1000) as player_full_name
                 ,pos::varchar(1000) as position
+                ,(season::int - 1) - age::int as year_of_birth
                 ,age::int 
                 ,team_id::varchar(1000) as teams
                 ,g::int as playoff_games_in_season
@@ -58,5 +59,13 @@ with nba_playoff_stats__players as (
             from nba_playoff_stats__players
 )
 
-select * from renaming_playoff_players_columns
+,playoff_players_stats as (
+    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+            , *
+      from renaming_playoff_players_columns
+)
+
+select * from playoff_players_stats
+
+
 
