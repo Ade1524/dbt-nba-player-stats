@@ -5,7 +5,7 @@ with nba_player_stats as (
 , rename_player_stats_columns as (
       select rk as rank_id
             ,year::varchar(1000) as seasons
-            ,replace(replace(player,'*', ' '), '-', ' ') as player_full_name
+            ,{{ clean_player_name('player') }} as player_name
             ,substring(year,1,4)::int - age as year_of_birth
             ,pos::varchar(1000) as position
             ,age::int as age
@@ -41,7 +41,7 @@ with nba_player_stats as (
 )
 
 ,players_stats_per_season as (
-    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+    select  {{ get_player_id('player_name', 'year_of_birth')}} as player_id 
             , *
       from rename_player_stats_columns
 )
