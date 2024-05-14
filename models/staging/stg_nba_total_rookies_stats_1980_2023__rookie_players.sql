@@ -3,12 +3,12 @@ with nba_rookies_stats__players as (
 )
 
 , renaming_columns_rookie_player_stats as (
-        select id::int as player_id
+        select id::int as id
               ,{{ get_season('year') }} AS seasons
-              ,replace(player, '-', ' ')::varchar(1000) as player_full_name
-              ,(year::int - 1) - age::int as year_of_birth
+              ,replace(player, '-', ' ')::varchar(1000) as player_name
+              ,{{ get_year_of_birth('year', 'age') }} as year_of_birth
               ,tm::varchar(1000) as teams
-              ,age::int 
+              ,age::int as age
               ,yrs::int as years_in_the_league
               ,g::int as games_played
               ,mp::int as minutes_played
@@ -36,15 +36,23 @@ with nba_rookies_stats__players as (
               ,pts_won::float as roty_points_won
               ,pts_max::float as max_amount_of_points_you_can_win
               ,share::float as pts_won_vs_pts_max
+              ,team::varchar(1000) as team_full_name
+              ,w::int as win_total_during_the_season
+              ,l::int as lose_total_during_the_season
+              ,w_l_pct::float as win_loss_percentage
+              ,gb::float as team_games_behind
+              ,ps_g::float as points_per_game_in_the_team
+              ,pa_g::float as opponents_points_per_game
+              ,srs::float as simple_rating_system
 
          from nba_rookies_stats__players     
 )
 
 ,rookie_players_stats as (
-    select  concat(player_full_name, '_', year_of_birth) as player_year_of_birth
+    select  {{ get_player_id('player_name', 'year_of_birth')}} as player_id 
             , *
       from renaming_columns_rookie_player_stats
 )
 
 select * from rookie_players_stats 
-
+--  where player_id like 'lebron%'
