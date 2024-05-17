@@ -10,5 +10,4 @@ sources:
         description: This table contains raw players stats data during the NBA playoffs from year 1958 to year 2023. This data are taken from the 'NBA-playoffs-stats.csv'.Each row describe the stats of each player at the playoffs during one season.  
       - name: rookie_players
         description: This table contains raw data about NBA rookie players from year 1980 to year 2023. This data are taken from the 'NBA-total-rookies-Stats.csv'.One row per each player
-      - name: rookie_teams
-        description: This table contains raw data about NBA teams of the rookie players from year 1980 to year 2023. This data are taken from the 'NBA-total-rookies-Stats.csv'.Each row describe how the rookie impacted in the team in his rookie season.
+      
