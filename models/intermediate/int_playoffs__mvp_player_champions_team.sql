@@ -9,8 +9,8 @@ with mvp_playoffs as (
           ,m.player_name as mvp_player
           ,t.champion_team as nba_champions
           ,t.runner_up__team as nba_runner_up
-      from mvp_playoffs m
-      full outer join team_champion t
+      from team_champion t
+      full outer join  mvp_playoffs m
       on m.seasons = t.seasons
       where t.league like 'NBA'
       order by 1 

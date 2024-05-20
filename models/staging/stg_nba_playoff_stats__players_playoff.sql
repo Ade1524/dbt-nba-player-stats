@@ -7,7 +7,7 @@ with nba_playoff_stats__players as (
                 ,replace(player, '-', ' ')::varchar(1000) as player_name
                 ,pos::varchar(1000) as position
                 ,{{ get_year_of_birth('season', 'age') }} as year_of_birth
-                ,age::int 
+                ,age::int as age
                 ,team_id::varchar(1000) as teams
                 ,g::int as playoff_games_in_season
                 ,gs::int as playoff_games_started_in_season
@@ -63,6 +63,7 @@ with nba_playoff_stats__players as (
     select  {{ get_player_id('player_name', 'year_of_birth')}} as player_id 
             , *
       from renaming_playoff_players_columns
+      order by seasons
 )
 
 select * from playoff_players_stats

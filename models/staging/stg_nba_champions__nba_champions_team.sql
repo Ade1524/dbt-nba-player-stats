@@ -6,8 +6,8 @@ with team_champion as (
 
 , renaming_champions_columns as (
     select {{ get_season('year') }} as seasons
-            ,champion as champion_team
-            ,runner_up as runner_up__team
+            ,lower(champion) as champion_team
+            ,lower(runner_up) as runner_up__team
             ,league
       from team_champion
      order by seasons
