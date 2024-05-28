@@ -37,14 +37,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 seeds:
   nba_player_stats:
-    +schema: seeds
+    +schema: raw
    
 models:
   nba_player_stats:
-    +materialized: table
+
     staging:
       +schema: staging
 
+    intermediate:
+      +schema: intermediate
 
     mart:
       +schema: mart
