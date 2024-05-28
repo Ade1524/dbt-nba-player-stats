@@ -21,7 +21,8 @@ with player_stats_97_2022 as (
        select player_id
              ,player_name
              ,year_of_birth
-         from rookie_players_stats     
+         from rookie_players_stats  
+           
 )
 select * from  union_rookie_player_stats_id
 

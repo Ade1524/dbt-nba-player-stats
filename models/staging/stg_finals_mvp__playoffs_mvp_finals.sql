@@ -1,10 +1,9 @@
-with mvp_player_season as (
-    select * from {{ ref('nba_season_mvp')}}
+with playoffs_mvp as (
+    select *
+       from {{ ref('finals_mvp') }}
+     order by season
 )
-
--- select * from mvp_player_season
-
-,rename_columns_mvp_players_stats as (
+, rename_mvp_column as (
     select season ::varchar(1000) as seasons
           ,lg as league
           ,replace(player, '-', ' ')::varchar(1000) as player_name
@@ -12,7 +11,7 @@ with mvp_player_season as (
           ,age
           ,tm::varchar(1000) as teams
           ,g::int as games
-          ,mp::float as minutes_played_per_gamet
+          ,mp::float as minutes_played_per_game
           ,pts::float as points_per_game
           ,trb::float as total_rebounds_per_game
           ,ast::float as assists_per_game
@@ -21,16 +20,12 @@ with mvp_player_season as (
           ,fg_pct::float as field_goal_percentage
           ,c_3p_pct::float as c_3_point_field_goal_percentage
           ,ft_pct::float as free_throw_percentage
-          ,ws::float as win_share
-          ,ws_48::float as  win_share_per_48_games
-          ,voting ::varchar(1000)
-      from mvp_player_season
+      from playoffs_mvp
 )
-,mvp_season_id as (
+,mvp_playoffs_id as (
     
     select  {{ get_player_id('player_name', 'year_of_birth')}} as player_id 
             , *
-      from rename_columns_mvp_players_stats 
+      from rename_mvp_column
 )
-select * from mvp_season_id
--- select * from rename_columns_mvp_players_stats
+select * from mvp_playoffs_id
