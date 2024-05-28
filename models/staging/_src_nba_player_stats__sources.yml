@@ -10,5 +10,11 @@ sources:
         description: This table contains raw players stats data during the NBA playoffs from year 1958 to year 2023. This data are taken from the 'NBA-playoffs-stats.csv'.Each row describe the stats of each player at the playoffs during one season.  
       - name: rookie_players
         description: This table contains raw data about NBA rookie players from year 1980 to year 2023. This data are taken from the 'NBA-total-rookies-Stats.csv'.One row per each player
-      - name: rookie_teams
-        description: This table contains raw data about NBA teams of the rookie players from year 1980 to year 2023. This data are taken from the 'NBA-total-rookies-Stats.csv'.Each row describe how the rookie impacted in the team in his rookie season.
+      - name: finals_mvp
+        description: This table contains stats about the mvp players of the finals Nba playoffs. This data are taken from the 'finals_mvp.csv'. Each row contains stats of the mvp player per season.
+      - name: finals_team_champion
+        description: This table contains the data about the team who won the NBa finals and the runner up.  This data are taken from the 'nba_champions.csv'. Each row contains the name of the winning team and the losing team per season.
+      - name: season_mvp
+        description: This table contains raw data stats of the mvp player during the regular season. This data are taken from the 'nba_season_mvp.csv'.Each row describe the stats of each  mvp player during one season. 
+      - name: teams_name
+        description: This table contains contain the abbreviate and the full name of the Nba teams. This data are taken from the 'nba_teams.csv'. One row per each team

@@ -1,0 +1,45 @@
+
+version: 2
+
+models:
+
+  - name: int_player_playoffs__add_team_name_player_table
+    description: This is an intermediate model where we the team full name for each player in the playoff player table.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.
+        
+
+  - name: int__total_players_rookie_playoffs
+    description: This is an intermediate model where we combined and select the players from the stats table 'int_player_stats__rookie_player_stats_no_tot' and the players playoffs table.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.
+
+
+  - name: int_player_stats__rookie_player_stats_no_tot
+    description: This is an intermediate model where we combined and select the players from the stats table 98-22 and rookie table.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.
+
+
+  - name: int_playoffs__players_playoffs
+    description: This is an intermediate model where we select the players from the playoffs table.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.
+
+             
+  - name: int_seasons__seasons
+    description: This is an intermediate model where each row is a season and the nba champion team.
+    columns:
+      - name: seasons
+        description: This is the columns where each row represent each season.
+        tests:
+          - unique
+          - not_null
+
+          
+  
+    

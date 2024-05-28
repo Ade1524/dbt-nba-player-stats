@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-  - name: dim_nba_players
+  - name: dim_nba__players
     description: This is a dimension model which contains the nba players. One row per player.
     columns:
       - name: player_id
@@ -11,7 +11,7 @@ models:
             - unique
             - not_null
 
-  - name: dim_nba_seasons
+  - name: dim_nba__seasons
     description: This is a dimension model which contains the nba seasons. One row per season.
     columns:
       - name: season_key
@@ -20,7 +20,7 @@ models:
             - unique
             - not_null
 
-  - name: dim_nba_teams
+  - name: dim_nba__teams
     description: This is a dimension model which contains the nba teams. One row per team.
     columns:
       - name: team_key
