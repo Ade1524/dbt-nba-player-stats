@@ -8,7 +8,7 @@ with seasons_nba_champions as (
 
 ,list_teams as (
     select *
-      from {{ ref('stg_nba_teams__list_teams_abbr_name')}}
+      from {{ ref('stg_nba_player_stats__nba_teams')}}
 )
 
 ,seasons_champion_teams as (

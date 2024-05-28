@@ -4,7 +4,7 @@ with player_playoffs_stats as (
 )
 , nba_teams as (
     select * 
-      from {{ ref('stg_nba_teams__list_teams_abbr_name') }}
+      from {{ ref('stg_nba_player_stats__nba_teams') }}
 )
 , add_teams_name as (
     select nt.team_name

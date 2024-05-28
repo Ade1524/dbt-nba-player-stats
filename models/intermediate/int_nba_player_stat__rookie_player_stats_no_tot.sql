@@ -9,7 +9,7 @@ with player_stats_97_2022 as (
 )
 , rookie_players_stats as (
     select *
-      from {{ ref('stg_nba_total_rookies_stats_1980_2023__rookie_players')}}
+      from {{ ref('stg_nba_player_stats__nba_total_rookies_stats_1980_2023')}}
 ) 
 , union_rookie_player_stats_id as (
            select 

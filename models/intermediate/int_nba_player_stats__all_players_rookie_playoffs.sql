@@ -1,10 +1,10 @@
 with players_rookie as (
     select * 
-     from {{ ref('int_player_stats__rookie_player_stats_no_tot') }}
+     from {{ ref('int_nba_player_stat__rookie_player_stats_no_tot') }}
 )
 ,playoffs_players as (
     select *
-     from {{ ref('int_playoffs__players_playoffs') }}
+     from {{ ref('int_nba_player_stats__players_playoffs') }}
 )
 , rookie_playoffs_players as (
     select *
