@@ -1,6 +1,6 @@
 with nba_teams_table as (
     select *
-      from {{ ref('stg_nba_teams__list_teams_abbr_name') }}
+      from {{ ref('stg_nba_player_stats__nba_teams') }}
 )
 ,teams_unique_id as (
     select {{ dbt_utils.generate_surrogate_key(['teams', 'team_name']) }} as team_key

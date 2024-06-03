@@ -1,6 +1,6 @@
 with player_playoffs_stats as (
     select *
-      from {{ ref('stg_nba_playoff_stats__players_playoff') }}
+      from {{ ref('stg_nba_player_stats__players_playoff') }}
 )
 , nba_teams as (
     select * 
