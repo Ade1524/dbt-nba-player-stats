@@ -1,6 +1,6 @@
 with playoffs_mvp as (
     select *
-       from {{ ref('finals_mvp') }}
+       from {{ ref('nba_finals_mvp') }}
      order by season
 )
 , rename_mvp_column as (
