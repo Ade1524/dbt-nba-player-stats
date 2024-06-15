@@ -1,6 +1,6 @@
 with player_stats_no_tot as (
      select *
-      from {{ ref('int_nba_player_stats__players_without_tot_adding_team_name')}}
+      from {{ ref('int_nba_player_stats__players_97_22_with_added_team_name_column')}}
 )
 
 , rookie_players_stats as (

@@ -11,4 +11,12 @@ with nba_teams as (
           ,lower(replace(team_name,'trailblazers','trail blazers')) as team_name
       from rename_knicks_team 
 )
-select * from rename_portland_team
+,rename_utah_team as (
+    select (replace(teams,'UTH','UTA')) as teams
+          ,team_name
+      from rename_portland_team 
+)
+
+select teams
+      ,initcap(team_name) as team_name
+ from rename_utah_team

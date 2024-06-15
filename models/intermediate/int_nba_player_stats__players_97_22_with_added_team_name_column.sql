@@ -13,12 +13,12 @@ with player_stats_97_2022 as (
       from {{ ref('stg_nba_player_stats__nba_teams') }}
 )
 , add_teams_name as (
-    select nt.team_name
-          ,pp.*
+    select pp.*
+          ,nt.team_name 
         from player_stats_no_tot pp 
         left join nba_teams nt 
-        on nt.teams = pp.teams
-     order by pp.seasons
+        on pp.teams = nt.teams
+     
 )
 
 select * from add_teams_name

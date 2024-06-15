@@ -1,6 +1,5 @@
 with seasons_nba_champions as (
-    select seasons
-          ,lower(champion_team) as champions_team_name
+    select *
      from {{ ref('stg_nba_player_stats__nba_champions_team')}}
      where league like 'NBA'
      order by seasons
@@ -13,11 +12,11 @@ with seasons_nba_champions as (
 
 ,seasons_champion_teams as (
     select sn.seasons
-          ,sn.champions_team_name as champions
+          ,sn.champion_team as champions
           ,lt.teams
      from seasons_nba_champions sn
      left join list_teams lt
-     on sn.champions_team_name = lt.team_name
+     on sn.champion_team = lt.team_name
      order by  sn.seasons
     
 )

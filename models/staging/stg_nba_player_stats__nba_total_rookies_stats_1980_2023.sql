@@ -8,7 +8,7 @@ with nba_rookies_stats__players as (
               ,replace(player, '-', ' ')::varchar(1000) as player_name
               ,{{ get_year_of_birth('year', 'age') }} as year_of_birth
               ,tm::varchar(1000) as teams
-              ,lower(team)::varchar(1000) as team_full_name
+              ,initcap(lower(team))::varchar(1000) as teams_name
               ,age::int as age
               ,yrs::int as years_in_the_league
               ,g::int as games_played
