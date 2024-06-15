@@ -1,6 +1,6 @@
 with players_rookie as (
     select * 
-     from {{ ref('int_nba_player_stats__rookie_player_stats_no_tot') }}
+     from {{ ref('int_nba_player_stats__player_stats_97_22_and_rookie_players_names') }}
 )
 ,playoffs_players as (
     select *
@@ -12,7 +12,8 @@ with players_rookie as (
      union
     select *
       from playoffs_players
-     order by year_of_birth
+     
 )
 
 select * from rookie_playoffs_players
+  order by year_of_birth

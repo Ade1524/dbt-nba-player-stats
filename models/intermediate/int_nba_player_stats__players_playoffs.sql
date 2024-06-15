@@ -1,6 +1,6 @@
 with table_players_in_the_playoffs as (
     select * 
-     from {{ ref('int_nba_player_stats__add_team_name_player_table') }}
+     from {{ ref('int_nba_player_stats__playoffs_players_added_team_name') }}
 )
 , playoffs_players as (
     select player_id
