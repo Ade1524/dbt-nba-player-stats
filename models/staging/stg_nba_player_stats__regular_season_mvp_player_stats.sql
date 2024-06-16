@@ -5,7 +5,7 @@ with mvp_player_season as (
 -- select * from mvp_player_season
 
 ,rename_columns_mvp_players_stats as (
-    select season ::varchar(1000) as seasons
+    select concat((substring(season,1,4))::varchar,'-',(substring(season,1,4)::int + 1)::varchar) as seasons
           ,lg as league
           ,replace(player, '-', ' ')::varchar(1000) as player_name
           ,substring(season,1,4)::int - age as year_of_birth

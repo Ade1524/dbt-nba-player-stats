@@ -4,7 +4,7 @@ with playoffs_mvp as (
      order by season
 )
 , rename_mvp_column as (
-    select season ::varchar(1000) as seasons
+    select concat((substring(season,1,4))::varchar,'-',(substring(season,1,4)::int + 1)::varchar) as seasons
           ,lg as league
           ,replace(player, '-', ' ')::varchar(1000) as player_name
           ,substring(season,1,4)::int - age as year_of_birth
@@ -25,6 +25,7 @@ with playoffs_mvp as (
 ,mvp_playoffs_id as (
     
     select  {{ get_player_id('player_name', 'year_of_birth')}} as player_id 
+    
             , *
       from rename_mvp_column
 )
