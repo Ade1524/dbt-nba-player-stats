@@ -26,6 +26,8 @@ with playoffs as (
    select {{ dbt_utils.generate_surrogate_key(['r.seasons']) }} as dim_season_key
           ,{{ dbt_utils.generate_surrogate_key(['r.player_id', 'r.player_name', 'r.year_of_birth']) }} as dim_player_key
           ,{{ dbt_utils.generate_surrogate_key(['r.teams', 'r.team_name']) }} as dim_team_key
+
+-- Seasons 97-22 player stats columns          
           ,r.player_id as regular_season_stats_player_id
           ,r.seasons as regular_season_stats_seasons
           ,r.player_name as regular_season_stats_player_name
@@ -59,7 +61,8 @@ with playoffs as (
           ,r.turnovers_per_game as regular_season_stats_turnovers_per_game
           ,r.personal_fouls_per_game as regular_season_stats_personal_fouls_per_game
           ,r.points_per_game as regular_season_stats_points_per_game
-          
+
+-- Playoffs player stats columns           
           ,p.team_name as playoffs_stats_team_name
           ,p.position as playoffs_stats_position
           ,p.age as playoffs_stats_age
@@ -111,6 +114,7 @@ with playoffs as (
           ,p.win_share as playoffs_stats_win_share
           ,p.win_share_per_48_games as playoffs_stats_win_share_per_48_games
  
+--  Rookies stats columns
           ,ro.seasons as rookie_stats_seasons 
           ,ro.player_name as rookie_stats_player_name 
           ,ro.teams as rookie_stats_teams 
@@ -150,7 +154,8 @@ with playoffs as (
           ,ro.points_per_game_in_the_team as rookie_stats_points_per_game_in_the_team
           ,ro.opponents_points_per_game as rookie_stats_opponents_points_per_game
           ,ro.simple_rating_system as rookie_stats_simple_rating_system
-         
+
+-- Regular season mvp stats columns         
           ,rsm.seasons as regular_season_mvp_seasons
           ,rsm.league as regular_season_mvp_league
           ,rsm.player_name as regular_season_mvp_player_name
@@ -170,6 +175,7 @@ with playoffs as (
           ,rsm.win_share_per_48_games as regular_season_mvp_win_share_per_48_games
           ,rsm.voting as regular_season_mvp_voting
           
+-- Finals mvp stats columns
           ,fm.seasons as finals_mvp_seasons
           ,fm.league as finals_mvp_league
           ,fm.player_name as finals_mvp_player_name
