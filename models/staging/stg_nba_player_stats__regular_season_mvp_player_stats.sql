@@ -12,7 +12,7 @@ with mvp_player_season as (
           ,age
           ,tm::varchar(1000) as teams
           ,g::int as games
-          ,mp::float as minutes_played_per_gamet
+          ,mp::float as minutes_played_per_games
           ,pts::float as points_per_game
           ,trb::float as total_rebounds_per_game
           ,ast::float as assists_per_game
@@ -23,7 +23,7 @@ with mvp_player_season as (
           ,ft_pct::float as free_throw_percentage
           ,ws::float as win_share
           ,ws_48::float as  win_share_per_48_games
-          ,voting ::varchar(1000)
+          ,voting ::varchar(1000) as voting
       from mvp_player_season
 )
 ,mvp_season_id as (
