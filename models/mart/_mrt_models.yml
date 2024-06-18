@@ -2,28 +2,28 @@ version: 2
 
 models:
 
-  - name: dim_nba__players
+  - name: dim_nba_players
     description: This is a dimension model which contains the nba players. One row per player.
     columns:
-      - name: player_id
+      - name: dim_player_key
         description: This is the unique id of each player.
         tests:
             - unique
             - not_null
 
-  - name: dim_nba__seasons
+  - name: dim_nba_seasons
     description: This is a dimension model which contains the nba seasons. One row per season.
     columns:
-      - name: season_key
+      - name: dim_season_key
         description: This is the unique surrogate key of each season
         tests:
             - unique
             - not_null
 
-  - name: dim_nba__teams
+  - name: dim_nba_teams
     description: This is a dimension model which contains the nba teams. One row per team.
     columns:
-      - name: team_key
+      - name: dim_team_key
         description: This is the unique surrogate key of each team
         tests:
             - unique
