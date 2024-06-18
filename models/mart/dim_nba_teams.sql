@@ -3,7 +3,7 @@ with nba_teams_table as (
       from {{ ref('stg_nba_player_stats__nba_teams') }}
 )
 ,teams_unique_id as (
-    select {{ dbt_utils.generate_surrogate_key(['teams', 'team_name']) }} as team_key
+    select {{ dbt_utils.generate_surrogate_key(['teams', 'team_name']) }} as dim_team_key
           ,teams
           ,team_name
       from nba_teams_table
