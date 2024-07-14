@@ -21,7 +21,8 @@ with player_stats_97_2022 as (
      
 )
 
-select *
-  from add_teams_name
+select * from add_teams_name
   
--- select * from  player_stats_no_tot
+
+
+
