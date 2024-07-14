@@ -20,3 +20,6 @@ with nba_teams as (
 select teams
       ,initcap(team_name) as team_name
  from rename_utah_team
+
+
+

@@ -14,12 +14,14 @@ with player_stats_97_2022 as (
 )
 , add_teams_name as (
     select pp.*
-          ,nt.team_name 
+          ,nt.team_name as team_name
         from player_stats_no_tot pp 
         left join nba_teams nt 
         on pp.teams = nt.teams
      
 )
 
-select * from add_teams_name
+select *
+  from add_teams_name
+  
 -- select * from  player_stats_no_tot
