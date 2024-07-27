@@ -18,11 +18,12 @@ with playoffs as (
      from {{ ref('stg_nba_player_stats__playoffs_mvp_finals') }}
 )
 
-,regular_plus_playoffs as (
+,final_playoffs as (
 
-   select {{ dbt_utils.generate_surrogate_key(['p.seasons']) }} as dim_season_key
+   select  {{ dbt_utils.generate_surrogate_key(['p.seasons']) }} as dim_season_key
           ,{{ dbt_utils.generate_surrogate_key(['p.player_id', 'p.player_name', 'p.year_of_birth']) }} as dim_player_key
           ,{{ dbt_utils.generate_surrogate_key(['p.teams', 'p.team_name']) }} as dim_team_key
+
           ,p.player_id as player_id
           ,p.seasons as seasons
           ,p.player_name as player_name
@@ -167,10 +168,11 @@ with playoffs as (
                                         and p.teams = rsm.teams 
                                         and p.seasons = rsm.seasons
       
+      
     
 )
 
-select * from regular_plus_playoffs
+select * from final_playoffs
 
 
 
