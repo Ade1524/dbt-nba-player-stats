@@ -7,6 +7,14 @@ with playoffs as (
     select *    
      from {{ ref('int_nba_player_stats__players_97_22_with_added_team_name_column') }}
 )
+
+, first_regular_season as (
+    select player_id,
+           min(seasons) as seasons
+      from regular
+     group by all
+)
+
 ,rookies as (
     select *    
      from {{ ref('stg_nba_player_stats__nba_total_rookies_stats_1980_2023') }}
@@ -21,11 +29,12 @@ with playoffs as (
     select *    
      from {{ ref('stg_nba_player_stats__playoffs_mvp_finals') }}
 )
-,regular_plus_playoffs as (
+,final_regular as (
 
    select {{ dbt_utils.generate_surrogate_key(['r.seasons']) }} as dim_season_key
           ,{{ dbt_utils.generate_surrogate_key(['r.player_id', 'r.player_name', 'r.year_of_birth']) }} as dim_player_key
           ,{{ dbt_utils.generate_surrogate_key(['r.teams', 'r.team_name']) }} as dim_team_key
+          
 
 -- Seasons 97-22 player stats columns          
           ,r.player_id as regular_season_stats_player_id
@@ -61,6 +70,7 @@ with playoffs as (
           ,r.turnovers_per_game as regular_season_stats_turnovers_per_game
           ,r.personal_fouls_per_game as regular_season_stats_personal_fouls_per_game
           ,r.points_per_game as regular_season_stats_points_per_game
+          ,(substring(frs.seasons, 1, 4)::number - substring(ro.seasons, 1, 4)::number) + row_number() over (partition by r.player_id order by r.seasons) as num_of_seasons_in_league
 
 -- Playoffs player stats columns           
           ,p.team_name as playoffs_stats_team_name
@@ -194,19 +204,12 @@ with playoffs as (
         
       from regular r 
       left join playoffs p  on r.player_id = p.player_id 
-                            and r.teams = p.teams 
-                            and r.seasons = p.seasons
-      left join rookies ro  on r.player_id = ro.player_id 
-                            and r.teams = ro.teams 
-                            and r.seasons = ro.seasons
+      left join rookies ro  on r.player_id = ro.player_id
+      left join first_regular_season frs  on r.player_id = frs.player_id 
       left join regular_season_mvp rsm  on r.player_id = rsm.player_id 
-                                        and r.teams = rsm.teams 
-                                        and r.seasons = rsm.seasons
-      left join finals_mvp fm  on r.player_id = fm.player_id 
-                                        and r.teams = fm.teams 
-                                        and r.seasons = fm.seasons
-      
+      left join finals_mvp fm  on r.player_id = fm.player_id
     
 )
 
-select * from regular_plus_playoffs
+
+select * from final_regular
