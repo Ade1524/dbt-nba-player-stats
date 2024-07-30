@@ -203,11 +203,11 @@ with playoffs as (
           ,fm.free_throw_percentage as finals_mvp_free_throw_percentage
         
       from regular r 
-      left join playoffs p  on r.player_id = p.player_id 
+      left join playoffs p  on r.player_id = p.player_id and r.seasons = p.seasons 
       left join rookies ro  on r.player_id = ro.player_id
       left join first_regular_season frs  on r.player_id = frs.player_id 
-      left join regular_season_mvp rsm  on r.player_id = rsm.player_id 
-      left join finals_mvp fm  on r.player_id = fm.player_id
+      left join regular_season_mvp rsm  on r.player_id = rsm.player_id and r.seasons = rsm.seasons
+      left join finals_mvp fm  on r.player_id = fm.player_id and r.seasons = fm.seasons
     
 )
 

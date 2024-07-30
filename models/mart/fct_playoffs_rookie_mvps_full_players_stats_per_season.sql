@@ -3,6 +3,14 @@ with playoffs as (
      from {{ ref('int_nba_player_stats__playoffs_players_added_team_name') }}
 )
 
+, first_playoffs_season as (
+    select player_id,
+           min(seasons) as seasons
+      from playoffs
+     group by all
+)
+
+
 ,rookies as (
     select *    
      from {{ ref('stg_nba_player_stats__nba_total_rookies_stats_1980_2023') }}
@@ -78,6 +86,7 @@ with playoffs as (
           ,p.value_over_replacement_player as playoffs_stats_value_over_replacement_player
           ,p.win_share as playoffs_stats_win_share
           ,p.win_share_per_48_games as playoffs_stats_win_share_per_48_games
+          ,(substring(fps.seasons, 1, 4)::number - substring(ro.seasons, 1, 4)::number) + row_number() over (partition by p.player_id order by p.seasons) as num_of_playoffs_in_league
 
 -- Final mvp stats 
           ,fm.seasons as finals_mvp_seasons
@@ -157,16 +166,28 @@ with playoffs as (
           ,rsm.win_share_per_48_games as regular_season_mvp_win_share_per_48_games
           ,rsm.voting as regular_season_mvp_voting
 
-     from playoffs p
-      left join finals_mvp fm  on p.player_id = fm.player_id 
-                            and p.teams = fm.teams 
-                            and p.seasons = fm.seasons
-      left join rookies ro  on p.player_id = ro.player_id 
-                            and p.teams = ro.teams 
-                            and p.seasons = ro.seasons
-      left join regular_season_mvp rsm  on p.player_id = rsm.player_id 
-                                        and p.teams = rsm.teams 
-                                        and p.seasons = rsm.seasons
+--      from playoffs p
+--       left join first_playoffs_season fps  on p.player_id = fps.player_id 
+--       left join finals_mvp fm  on p.player_id = fm.player_id 
+--                             and p.teams = fm.teams 
+--                             and p.seasons = fm.seasons
+--       left join rookies ro  on p.player_id = ro.player_id 
+--                             and p.teams = ro.teams 
+--                             and p.seasons = ro.seasons
+      
+--       left join regular_season_mvp rsm  on p.player_id = rsm.player_id 
+--                                         and p.teams = rsm.teams 
+--                                         and p.seasons = rsm.seasons
+      
+      
+    
+-- )
+
+from playoffs p
+      left join first_playoffs_season fps on p.player_id = fps.player_id 
+      left join finals_mvp fm on p.player_id = fm.player_id and p.seasons = fm.seasons   
+      left join rookies ro on p.player_id = ro.player_id
+      left join regular_season_mvp rsm on p.player_id = rsm.player_id and p.seasons = rsm.seasons
       
       
     
