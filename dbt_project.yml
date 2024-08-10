@@ -53,5 +53,5 @@ models:
       +materialized: table
     
     analytics:
-      +schema: report
+      +schema: analytics
       +materialized: table

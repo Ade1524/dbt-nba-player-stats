@@ -9,6 +9,11 @@ with seasons_table as (
       from seasons_table
 )
 
+,final as (
+    select dim_season_key as dim_season_key
+          ,seasons
+          ,champions
+     from season_id
+)
 
-
-select * from season_id
+select * from final
