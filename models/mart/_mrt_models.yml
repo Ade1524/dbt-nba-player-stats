@@ -15,7 +15,7 @@ models:
     description: This is a dimension model which contains the nba seasons. One row per season.
     columns:
       - name: dim_season_key
-        description: This is the unique surrogate key of each season
+        description: This is the unique surrogate key of each season.
         tests:
             - unique
             - not_null
@@ -24,9 +24,15 @@ models:
     description: This is a dimension model which contains the nba teams. One row per team.
     columns:
       - name: dim_team_key
-        description: This is the unique surrogate key of each team
+        description: This is the unique surrogate key of each team.
         tests:
             - unique
             - not_null
+
+  - name: fct__regular_rookie_playoffs_mvps_full_players_stats_seasons_97_22
+    description: This is an fact model where we joined the intermediate and the staging model.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.         
 
   
