@@ -1,0 +1,10 @@
+version: 2
+
+models:
+
+  - name: rpt__regular_rookie_playoffs_mvps_full_players_stats_seasons_97_22
+    description: This is an report model where we joined the dimension and the fact model.
+    columns:
+      - name: player_id
+        description: This is the unique id for each player by combining player name and the year of birth.
+       
